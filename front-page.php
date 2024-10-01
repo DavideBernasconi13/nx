@@ -81,6 +81,37 @@
 
     wp_reset_postdata(); ?>
 
+
+    <!-- Card
+    ---------------------------------- -->
+
+    <div class="container">
+        <div class="card-deck mt-5">
+            
+            <?php
+            // The Query
+            $nx_query1 = new WP_Query('category_name=focus&posts_per_page=3');
+            // The loop
+            while ($nx_query1->have_posts()) {
+                $nx_query1->the_post(); ?>
+
+                <div class="card">
+                    <a href="<?php the_permalink() ?>">
+                        <?php the_post_thumbnail('nx_single', array('class' => 'img-fluid mb-2 card-img-top', 'alt' => get_the_title())) ?></a>
+                    <div class="card-body">
+                        <h4 class="card-title"><?php the_title() ?></h4>
+                        <div class="card-text"> <?php the_excerpt() ?></div>
+                        <p class="card-text"><small class="text-muted"><?php the_time('j M Y') ?> -
+                                <?php the_category(', ') ?></small></p>
+                    </div>
+                </div>
+            <?php }
+            wp_reset_postdata(); ?>
+        </div>
+    </div>
+
+
+</div>
 </div>
 
 <?php get_footer(); ?>
